@@ -17,30 +17,28 @@ $(document).ready(function() {
     let licznikPrzegranychSBR = 0;
     let czyJestWAlternatywnymUniwersum = false;
     
-    // --- LISTA 15 ZAWODNIKÓW SBR + ICH OPISY ---
+    // --- LISTA 15 ZAWODNIKÓW SBR (OPISY, ZDJĘCIA I GOTOWE PLIKI MUZYCZNE) ---
     const zawodnicySBRData = [
-        { id: 0,  nazwa: '', opis: '' },
-        { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.' },
-        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.' },
-        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.' },
-        { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.' },
-        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).' },
-        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.' },
-        { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.' },
-        { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).' },
-        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!' },
-        { id: 10, nazwa: 'Norisuke Higashikata', opis: 'Japoński uczestnik wyścigu reprezentujący tradycję i styl.' },
-        { id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).' },
-        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.' },
-        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.' },
-        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.' },
-        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!' }
+        { id: 0,  nazwa: '', opis: '', zdjecie: '', audio: '' },
+        { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.', zdjecie: 'johnny.jpg', audio: 'Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3' },
+        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.', zdjecie: 'd4c.jpg', audio: 'Hava Nagila_1.mp3' },
+        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.', zdjecie: 'Adolf-Hitler-1933.jpg', audio: 'Erika German song.mp3' },
+        { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.', zdjecie: 'malymeksykaniec.jpg', audio: 'Jackpot_1.mp3' },
+        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).', zdjecie: 'meksykanka.jpg', audio: 'Hitler_s speech meine arbeit_1_1.mp3' },
+        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.', zdjecie: 'George_Floyd.jpg', audio: 'Nein_1.mp3' },
+        { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.', zdjecie: 'whoopie.jpg', audio: 'Bandera_1 (1).mp3' },
+        { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).', zdjecie: 'indianin.jpg', audio: 'Strzal_1 (1).mp3' },
+        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!', zdjecie: 'Old_Indian_woman_with_a_sari.jpg', audio: 'Fleetwood Mac - The Chain (Official Audio)_1.mp3' },
+        { id: 10, nazwa: 'Norisuke Higashikata', opis: 'Japoński uczestnik wyścigu reprezentujący tradycję i styl.', zdjecie: 'swine.jpg', audio: 'Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3' },
+        { id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).', zdjecie: 'bandera.jpg', audio: 'Arigato_1.mp3' },
+        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.', zdjecie: 'jew.jpg', audio: 'D4C Funny Valentine Animation _ SBR_1.mp3' },
+        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.', zdjecie: 'captainisrael.jpg', audio: 'Hava Nagila_1.mp3' },
+        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.', zdjecie: 'bigyahu.jpg', audio: 'Jackpot_1.mp3' },
+        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!', zdjecie: 'derek.jpg', audio: 'Erika German song.mp3' }
     ];
 
     const imionaSBR = zawodnicySBRData.map(z => z.nazwa);
 
-    // Zapamiętane ścieżki dźwiękowe dla każdego zawodnika
-    let sciezkiAudioZawodnikow = {};
     let aktywneAudioZawodnika = null;
     let aktualnieWybranyDoPodgladu = 1;
 
@@ -57,7 +55,7 @@ $(document).ready(function() {
     let audioAUValentine = new Audio('D4C Funny Valentine Animation _ SBR_1.mp3'); 
     let audioUcieczkaJohnny = new Audio('Arigato_1.mp3');
 
-    // --- INICJALIZACJA PANELA ZAWODNIKÓW Z PRZEŁĄCZNIKAMI ---
+    // --- INICJALIZACJA PANELA ZAWODNIKÓW Z ZAKŁADKAMI ---
     function zainicjujPanelZawodnikow() {
         let $przelacznik = $('#sbr-przelacznik-zawodnikow');
         $przelacznik.empty();
@@ -93,7 +91,7 @@ $(document).ready(function() {
 
         $('#zawodnik-nazwa').text(id + '. ' + dane.nazwa);
         $('#zawodnik-opis').text(dane.opis);
-        $('#zawodnik-audio-input').val(sciezkiAudioZawodnikow[id] || '');
+        $('#zawodnik-zdjecie').attr('src', dane.zdjecie);
     }
 
     $(document).on('click', '.btn-zakladka-zawodnik', function() {
@@ -101,30 +99,25 @@ $(document).ready(function() {
         pokażPodglądZawodnika(id);
     });
 
-    $('#zawodnik-audio-input').on('input', function() {
-        sciezkiAudioZawodnikow[aktualnieWybranyDoPodgladu] = $(this).val().trim();
-    });
-
-    // Przycisk PLAY dla wybranego zawodnika
+    // Przycisk PLAY dla aktualnie wybranego zawodnika
     $('#btn-odtwarzaj-zawodnika').on('click', function() {
-        let sciezka = $('#zawodnik-audio-input').val().trim();
+        let dane = zawodnicySBRData[aktualnieWybranyDoPodgladu];
+        let plikAudio = dane.audio;
 
-        if (!sciezka) {
-            alert('Wpisz ścieżkę do pliku dźwiękowego (np. Johnny.mp3)!');
+        if (!plikAudio) {
+            alert('Ten zawodnik nie ma przypisanej piosenki!');
             return;
         }
-
-        sciezkiAudioZawodnikow[aktualnieWybranyDoPodgladu] = sciezka;
 
         if (aktywneAudioZawodnika) {
             aktywneAudioZawodnika.pause();
             aktywneAudioZawodnika.currentTime = 0;
         }
 
-        aktywneAudioZawodnika = new Audio(sciezka);
+        aktywneAudioZawodnika = new Audio(plikAudio);
         aktywneAudioZawodnika.loop = true;
         aktywneAudioZawodnika.play().catch(e => {
-            alert('Nie udało się odtworzyć pliku. Sprawdź, czy nazwa pliku jest poprawna!');
+            alert('Nie udało się odtworzyć pliku: ' + plikAudio);
             console.log(e);
         });
     });
