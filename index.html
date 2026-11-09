@@ -101,28 +101,29 @@
         <p id="sbr-status" style="color: #ffcc00; font-size: 1em; margin: 12px 0 0 0; font-weight: bold; min-height: 24px;">Wybierz swojego jeźdźca</p>
     </div>
 
-    <!-- PANELI ZAWODNIKÓW SBR Z PRZEŁĄCZNIKIEM I MUZYKĄ (POD WYŚCIGIEM, NAD RANKINGIEM) -->
+    <!-- PANEL ZAWODNIKÓW SBR Z ZAKŁADKAMI, ZDJĘCIEM I PRZYCISKAMI PLAY/STOP -->
     <div id="sbr-dolny-panel-zawodnikow" style="width: 520px; max-width: 95%; background: rgba(30, 20, 45, 0.95); border: 3px solid #900bdd; border-radius: 12px; padding: 18px; color: #e0d0ff; text-align: center; margin-bottom: 30px; box-shadow: 0 0 20px rgba(144, 11, 221, 0.4); box-sizing: border-box;">
-        <h3 style="color: #ffcc00; margin-top: 0; text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);">📖 OPISY ZAWODNIKÓW & MUZYKA</h3>
-        <p style="font-size: 0.85em; margin-bottom: 12px; color: #d0c0ff;">Kliknij zawodnika poniżej, aby wyświetlić opis i ustawić jego utwór muzyczny!</p>
+        <h3 style="color: #ffcc00; margin-top: 0; text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);">📖 GALERIA & MUZYKA ZAWODNIKÓW</h3>
+        <p style="font-size: 0.85em; margin-bottom: 12px; color: #d0c0ff;">Kliknij zawodnika poniżej, aby zobaczyć jego zdjęcie, opis i odtworzyć muzykę!</p>
 
-        <!-- Pasek zakładek do przełączania zawodników -->
+        <!-- Zakładki do przełączania zawodników -->
         <div id="sbr-przelacznik-zawodnikow" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 15px;">
             <!-- Generowane w JS -->
         </div>
 
         <!-- Główny podgląd wybranego zawodnika -->
-        <div id="podglad-zawodnika" style="background: rgba(15, 5, 25, 0.8); border: 2px solid #b14def; border-radius: 10px; padding: 15px; text-align: left;">
-            <h4 id="zawodnik-nazwa" style="color: #ffcc00; margin: 0 0 8px 0; font-size: 1.2em;">Wybrany Zawodnik</h4>
-            <p id="zawodnik-opis" style="font-size: 0.9em; margin: 0 0 12px 0; color: #e0d0ff;">Opis zawodnika.</p>
+        <div id="podglad-zawodnika" style="background: rgba(15, 5, 25, 0.8); border: 2px solid #b14def; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center;">
             
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <label style="font-size: 0.8em; font-weight: bold; color: #b14def;">Wpisz plik piosenki (np. Johnny.mp3):</label>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <input type="text" id="zawodnik-audio-input" placeholder="np. Johnny.mp3" style="flex: 1; min-width: 160px; padding: 6px; border-radius: 5px; border: 1px solid #900bdd; background: #1a0b2e; color: #fff; font-weight: bold;">
-                    <button id="btn-odtwarzaj-zawodnika" style="padding: 6px 14px; background: #2ed573; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">▶ Play</button>
-                    <button id="btn-zatrzymaj-zawodnika" style="padding: 6px 14px; background: #ff4757; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">⏹ Stop</button>
-                </div>
+            <!-- Miejsce na zdjęcie zawodnika -->
+            <img id="zawodnik-zdjecie" src="" alt="Zdjęcie zawodnika" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #ffcc00; border-radius: 8px; box-shadow: 0 0 10px rgba(255,204,0,0.5);">
+
+            <h4 id="zawodnik-nazwa" style="color: #ffcc00; margin: 0; font-size: 1.2em;">Nazwa Zawodnika</h4>
+            <p id="zawodnik-opis" style="font-size: 0.9em; margin: 0; color: #e0d0ff;">Opis zawodnika.</p>
+            
+            <!-- Przyciski muzyczne Play / Stop bez wpisywania nazwy -->
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <button id="btn-odtwarzaj-zawodnika" style="padding: 8px 20px; background: #2ed573; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1em;">▶ Play</button>
+                <button id="btn-zatrzymaj-zawodnika" style="padding: 8px 20px; background: #ff4757; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1em;">⏹ Stop</button>
             </div>
         </div>
     </div>
