@@ -12,29 +12,132 @@ $(document).ready(function() {
     
     let ostatniSprawdzonyProgRuletki = 0;
 
-   
     let wybranySBR = null;
     let wTrakcieWysciguSBR = false;
     let licznikPrzegranychSBR = 0;
     let czyJestWAlternatywnymUniwersum = false;
     
-    
+    // --- LISTA 15 ZAWODNIKÓW SBR + ICH OPISY ---
+    const zawodnicySBRData = [
+        { id: 0,  nazwa: '', opis: '' },
+        { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.' },
+        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.' },
+        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.' },
+        { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.' },
+        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).' },
+        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.' },
+        { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.' },
+        { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).' },
+        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!' },
+        { id: 10, nazwa: 'Norisuke Higashikata', opis: 'Japoński uczestnik wyścigu reprezentujący tradycję i styl.' },
+        { id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).' },
+        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.' },
+        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.' },
+        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.' },
+        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!' }
+    ];
+
+    const imionaSBR = zawodnicySBRData.map(z => z.nazwa);
+
+    // Zapamiętane ścieżki dźwiękowe dla każdego zawodnika
+    let sciezkiAudioZawodnikow = {};
+    let aktywneAudioZawodnika = null;
+    let aktualnieWybranyDoPodgladu = 1;
+
+    // --- OBIEKTY AUDIO DLA GRY ---
     let audioSBRMuzyka = new Audio('Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3');
     audioSBRMuzyka.loop = true;
 
-   
     let audioMuzyka10k = new Audio('Bandera_1 (1).mp3');
     audioMuzyka10k.loop = true;
 
-    
     let audioMuzykaAU = new Audio(''); 
     audioMuzykaAU.loop = true;
 
-   
     let audioAUValentine = new Audio('D4C Funny Valentine Animation _ SBR_1.mp3'); 
-
-    // Ścieżka dźwiękowa przy ucieczce z AU (Johnny Joestar)
     let audioUcieczkaJohnny = new Audio('Arigato_1.mp3');
+
+    // --- INICJALIZACJA PANELA ZAWODNIKÓW Z PRZEŁĄCZNIKAMI ---
+    function zainicjujPanelZawodnikow() {
+        let $przelacznik = $('#sbr-przelacznik-zawodnikow');
+        $przelacznik.empty();
+
+        for (let i = 1; i <= 15; i++) {
+            let $btn = $('<button></button>')
+                .text(i + '. ' + zawodnicySBRData[i].nazwa.split(' ')[0])
+                .addClass('btn-zakladka-zawodnik')
+                .attr('data-id', i)
+                .css({
+                    'padding': '5px 8px',
+                    'background': i === 1 ? '#b14def' : '#1a0b2e',
+                    'color': 'white',
+                    'border': '1px solid #900bdd',
+                    'border-radius': '4px',
+                    'font-size': '0.75em',
+                    'font-weight': 'bold',
+                    'cursor': 'pointer'
+                });
+
+            $przelacznik.append($btn);
+        }
+
+        pokażPodglądZawodnika(1);
+    }
+
+    function pokażPodglądZawodnika(id) {
+        aktualnieWybranyDoPodgladu = id;
+        let dane = zawodnicySBRData[id];
+
+        $('.btn-zakladka-zawodnik').css('background', '#1a0b2e');
+        $(`.btn-zakladka-zawodnik[data-id="${id}"]`).css('background', '#b14def');
+
+        $('#zawodnik-nazwa').text(id + '. ' + dane.nazwa);
+        $('#zawodnik-opis').text(dane.opis);
+        $('#zawodnik-audio-input').val(sciezkiAudioZawodnikow[id] || '');
+    }
+
+    $(document).on('click', '.btn-zakladka-zawodnik', function() {
+        let id = parseInt($(this).attr('data-id'));
+        pokażPodglądZawodnika(id);
+    });
+
+    $('#zawodnik-audio-input').on('input', function() {
+        sciezkiAudioZawodnikow[aktualnieWybranyDoPodgladu] = $(this).val().trim();
+    });
+
+    // Przycisk PLAY dla wybranego zawodnika
+    $('#btn-odtwarzaj-zawodnika').on('click', function() {
+        let sciezka = $('#zawodnik-audio-input').val().trim();
+
+        if (!sciezka) {
+            alert('Wpisz ścieżkę do pliku dźwiękowego (np. Johnny.mp3)!');
+            return;
+        }
+
+        sciezkiAudioZawodnikow[aktualnieWybranyDoPodgladu] = sciezka;
+
+        if (aktywneAudioZawodnika) {
+            aktywneAudioZawodnika.pause();
+            aktywneAudioZawodnika.currentTime = 0;
+        }
+
+        aktywneAudioZawodnika = new Audio(sciezka);
+        aktywneAudioZawodnika.loop = true;
+        aktywneAudioZawodnika.play().catch(e => {
+            alert('Nie udało się odtworzyć pliku. Sprawdź, czy nazwa pliku jest poprawna!');
+            console.log(e);
+        });
+    });
+
+    // Przycisk STOP
+    $('#btn-zatrzymaj-zawodnika').on('click', function() {
+        if (aktywneAudioZawodnika) {
+            aktywneAudioZawodnika.pause();
+            aktywneAudioZawodnika.currentTime = 0;
+        }
+    });
+
+    zainicjujPanelZawodnikow();
 
     // Progi obrazków w GŁÓWNYM ŚWIECIE (11 poziomów)
     const progiObrazkowGlownych = [
@@ -117,7 +220,7 @@ $(document).ready(function() {
         aktualizujSklep();
     }
 
-    // --- OBSŁUGA MINIGRY SBR DLA 10 JEŹDŹCÓW ---
+    // --- OBSŁUGA MINIGRY SBR DLA 15 JEŹDŹCÓW ---
     $('.btn-sbr-faworyt').on('click', function() {
         if (wTrakcieWysciguSBR) return;
         
@@ -125,11 +228,7 @@ $(document).ready(function() {
         $('.btn-sbr-faworyt').css({ 'border-color': 'transparent', 'background-color': '#900bdd' });
         $(this).css({ 'border-color': '#ffcc00', 'background-color': '#b14def' });
         
-        let imiona = [
-            '', 'Johnny Joestar', 'Gyro Zeppeli', 'Diego Brando', 'Hot Pants', 
-            'Ringo Roadagain', 'Mountain Tim', 'Wekapipo', 'Pocoloco', 'Sandman', 'Norisuke Higashikata'
-        ];
-        $('#sbr-status').text('Wybrano: ' + imiona[wybranySBR]);
+        $('#sbr-status').text('Wybrano: ' + imionaSBR[wybranySBR]);
     });
 
     $('#sbr-start').on('click', function() {
@@ -156,19 +255,19 @@ $(document).ready(function() {
 
         audioSBRMuzyka.currentTime = 0;
         audioSBRMuzyka.play().catch(e => console.log("Autoplay muzyki SBR zablokowany"));
-        $('#sbr-status').text('Wielki wyścig Steel Ball Run wystartował!');
+        $('#sbr-status').text('Wielki wyścig Steel Ball Run dla 15 jeźdźców wystartował!');
 
-        let pozycje = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5];
+        let pozycje = new Array(16).fill(5);
         let metaX = 425; 
 
         let pętlaSBR = setInterval(function() {
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 15; i++) {
                 pozycje[i] += Math.floor(Math.random() * 8) + 1;
                 $('#sbr-koniu-' + i).css('left', pozycje[i] + 'px');
             }
 
             let zwyciezca = 0;
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 15; i++) {
                 if (pozycje[i] >= metaX) {
                     zwyciezca = i;
                     break;
@@ -181,15 +280,10 @@ $(document).ready(function() {
                 audioSBRMuzyka.pause();
                 audioSBRMuzyka.currentTime = 0;
 
-                let imiona = [
-                    '', 'Johnny Joestar', 'Gyro Zeppeli', 'Diego Brando', 'Hot Pants', 
-                    'Ringo Roadagain', 'Mountain Tim', 'Wekapipo', 'Pocoloco', 'Sandman', 'Norisuke Higashikata'
-                ];
-
                 if (wybranySBR === zwyciezca) {
                     let nagroda = 10000;
                     ileKlikniec += nagroda;
-                    $('#sbr-status').html(`WYGRANA! 🎉 ${imiona[zwyciezca]} wygrywa wyścig! (+${nagroda} pkt)`);
+                    $('#sbr-status').html(`WYGRANA! 🎉 ${imionaSBR[zwyciezca]} wygrywa wyścig! (+${nagroda} pkt)`);
 
                     let audioSBRWygrana = new Audio('Fleetwood Mac - The Chain (Official Audio)_1.mp3');
                     audioSBRWygrana.play().catch(e => {});
@@ -201,9 +295,9 @@ $(document).ready(function() {
                 } else {
                     if (!czyJestWAlternatywnymUniwersum) {
                         licznikPrzegranychSBR++;
-                        $('#sbr-status').html(`PRZEGRANA (${licznikPrzegranychSBR})! 😢 Wygrał: ${imiona[zwyciezca]}.`);
+                        $('#sbr-status').html(`PRZEGRANA (${licznikPrzegranychSBR})! 😢 Wygrał: ${imionaSBR[zwyciezca]}.`);
                     } else {
-                        $('#sbr-status').html(`PRZEGRANA w AU! 😢 Wygrał: ${imiona[zwyciezca]}. Wygrana jest wymagana, by uciec!`);
+                        $('#sbr-status').html(`PRZEGRANA w AU! 😢 Wygrał: ${imionaSBR[zwyciezca]}. Wygrana jest wymagana, by uciec!`);
                     }
 
                     let audioSBRPrzegrana = new Audio('アニメ『スティール・ボール・ラン ジョジョの奇妙な冒険』ノンクレジットエンディング映像｜千葉雄喜 『死ぬか生きるか』_1.mp3');
@@ -219,7 +313,7 @@ $(document).ready(function() {
                 sprawdzIRozszerzRekord();
 
                 setTimeout(function() {
-                    for (let i = 1; i <= 10; i++) {
+                    for (let i = 1; i <= 15; i++) {
                         $('#sbr-koniu-' + i).css('left', '5px');
                     }
                     wTrakcieWysciguSBR = false;
@@ -582,7 +676,6 @@ $(document).ready(function() {
     }
 
     function sprawdzTlo() {
-        // Usuwamy klasy wszystkich teł z obu światów
         $('body').removeClass('tlo-poziom-500 tlo-poziom-2000 tlo-poziom-10000 tlo-poziom-50000 au-tlo-poziom-0 au-tlo-poziom-200 au-tlo-poziom-500 au-tlo-poziom-1000 au-tlo-poziom-2000 au-tlo-poziom-5000 au-tlo-poziom-10000 au-tlo-poziom-20000 au-tlo-poziom-50000 au-tlo-poziom-100000 au-tlo-poziom-250000');
 
         if (!czyJestWAlternatywnymUniwersum) {
@@ -608,7 +701,6 @@ $(document).ready(function() {
             }
 
         } else {
-            // Muzyka w tle AU gra od 10k punktów (lub możesz zmienić warunek)
             if (ileKlikniec >= 10000) {
                 if (audioMuzykaAU.paused) {
                     audioMuzykaAU.play().catch(e => console.log("Autoplay muzyki AU zablokowany"));
@@ -620,7 +712,6 @@ $(document).ready(function() {
                 }
             }
 
-            // --- ZAKTUALIZOWANE PROGI TŁA DLA AU (WSZYSTKIE 11 POZIOMÓW) ---
             if (ileKlikniec >= 250000) {
                 $('body').addClass('au-tlo-poziom-250000');
             } else if (ileKlikniec >= 100000) {
