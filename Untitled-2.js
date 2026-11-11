@@ -24,20 +24,20 @@ $(document).ready(function() {
     const zawodnicySBRData = [
         { id: 0,  nazwa: '', opis: '', zdjecie: '', audio: '' },
         { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.', zdjecie: 'johnny11.jpg', audio: 'Fleetwood Mac - Tusk (Official Music Video) [HD].m4a' },
-        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.', zdjecie: 'gyro.jpg', audio: 'Ballbreaker.m4a' },
-        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.', zdjecie: 'diegobrando.jpg', audio: 'David Bowie- Scary Monsters (And super creeps).m4a' },
+        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu Jego stand nazywa się Ball Breaker.', zdjecie: 'gyro.jpg', audio: 'Ballbreaker.m4a' },
+        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności, jego stand Scary Monsters pozwala mu na przemiane w dinozaura.', zdjecie: 'diegobrando.jpg', audio: 'David Bowie- Scary Monsters (And super creeps).m4a' },
         { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.', zdjecie: 'Hot_Pants.jpg', audio: 'James Brown - Hot Pants.m4a' },
-        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).', zdjecie: 'ringo.jpg', audio: 'Jerry Wallace - Lovers Of The World (1976).m4a' },
-        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.', zdjecie: 'MountainTim.jpg', audio: 'OH LONESOME ME ~ Don Gibson  1958.wmv.m4a' },
+        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Potrafi manipulować cofa czas o 6 sekund za pomocą swojego standa Mandom.', zdjecie: 'ringo.jpg', audio: 'Jerry Wallace - Lovers Of The World (1976).m4a' },
+        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi poruszać się za pomocą swojego standa Oh! Lonesome Me poprzez swoje lasso.', zdjecie: 'MountainTim.jpg', audio: 'OH LONESOME ME ~ Don Gibson  1958.wmv.m4a' },
         { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.', zdjecie: '400px-Wekapipo_Infobox_Manga.jpg', audio: 'SOUL_d OUT - Wekapipo (Wake up people).m4a' },
         { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).', zdjecie: '640px-Pocoloco_Infobox_Manga.jpg', audio: 'OutKast - Hey Ya! (Lyrics).m4a' },
-        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!', zdjecie: 'InASilentWaycolor.jpg', audio: 'Sandman.m4a' },
+        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!. Jego umiejętność In a Silent Way pozwala mu na umieszczanie płapek', zdjecie: 'InASilentWaycolor.jpg', audio: 'Sandman.m4a' },
 { id: 10, nazwa: 'Blackmore', opis: 'Oddany zwiadowca i zabójca Funny Valentine. Posiada Stand Catch the Rainbow, który pozwala mu kontrolować deszcz i poruszać się po kroplach wody.', zdjecie: 'catchtherainbow.jpg', audio: 'Catch The Rainbow.m4a' },
-        {id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).', zdjecie: 'OyecomovaStand.jpg', audio: 'Santana - Oye Como Va (Official Audio).m4a' },
-        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.', zdjecie: 'L_a.jpg', audio: 'Tomb of the Boom.m4a' },
-        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.', zdjecie: 'Benjamin_Boom_Boom_Infobox_Manga.jpg', audio: 'Tomb of the Boom.m4a' },
-        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.', zdjecie: 'Andre.jpg', audio: 'Tomb of the Boom.m4a' },
-        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!', zdjecie: 'Mrs_Robinson_Infobox_Manga.jpg', audio: 'Simon & Garfunkel - Mrs. Robinson (Audio).m4a' }
+        {id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Neapolu (Boku no Rhythm wo Kiitekure).', zdjecie: 'OyecomovaStand.jpg', audio: 'Santana - Oye Como Va (Official Audio).m4a' },
+        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym. Jego stand to Tomb of the Boom', zdjecie: 'L_a.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom. Jego stand to Tomb of the Boom', zdjecie: 'Benjamin_Boom_Boom_Infobox_Manga.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego. Jego stand to Tomb of the Boom', zdjecie: 'Andre.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z wioski na pustyni korzystający z zabójczych insektów', zdjecie: 'Mrs_Robinson_Infobox_Manga.jpg', audio: 'Simon & Garfunkel - Mrs. Robinson (Audio).m4a' }
     ];
     // ==========================================
 
