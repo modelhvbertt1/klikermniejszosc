@@ -17,32 +17,38 @@ $(document).ready(function() {
     let licznikPrzegranychSBR = 0;
     let czyJestWAlternatywnymUniwersum = false;
     
-    // --- LISTA 15 ZAWODNIKÓW SBR (OPISY, ZDJĘCIA I GOTOWE PLIKI MUZYCZNE) ---
+    // ==========================================
+    // --- TUTAJ MOŻESZ ZMIENIAĆ OPISY, ZDJĘCIA ---
+    // --- ORAZ OSOBNE PIOSENKI DLA KAŻDEGO ZAWODNIKA ---
+    // ==========================================
     const zawodnicySBRData = [
         { id: 0,  nazwa: '', opis: '', zdjecie: '', audio: '' },
-        { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.', zdjecie: 'johnny.jpg', audio: 'Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3' },
-        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.', zdjecie: 'd4c.jpg', audio: 'Hava Nagila_1.mp3' },
-        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.', zdjecie: 'Adolf-Hitler-1933.jpg', audio: 'Erika German song.mp3' },
-        { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.', zdjecie: 'malymeksykaniec.jpg', audio: 'Jackpot_1.mp3' },
-        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).', zdjecie: 'meksykanka.jpg', audio: 'Hitler_s speech meine arbeit_1_1.mp3' },
-        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.', zdjecie: 'George_Floyd.jpg', audio: 'Nein_1.mp3' },
-        { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.', zdjecie: 'whoopie.jpg', audio: 'Bandera_1 (1).mp3' },
-        { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).', zdjecie: 'indianin.jpg', audio: 'Strzal_1 (1).mp3' },
-        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!', zdjecie: 'Old_Indian_woman_with_a_sari.jpg', audio: 'Fleetwood Mac - The Chain (Official Audio)_1.mp3' },
-        { id: 10, nazwa: 'Norisuke Higashikata', opis: 'Japoński uczestnik wyścigu reprezentujący tradycję i styl.', zdjecie: 'swine.jpg', audio: 'Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3' },
-        { id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).', zdjecie: 'bandera.jpg', audio: 'Arigato_1.mp3' },
-        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.', zdjecie: 'jew.jpg', audio: 'D4C Funny Valentine Animation _ SBR_1.mp3' },
-        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.', zdjecie: 'captainisrael.jpg', audio: 'Hava Nagila_1.mp3' },
-        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.', zdjecie: 'bigyahu.jpg', audio: 'Jackpot_1.mp3' },
-        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!', zdjecie: 'derek.jpg', audio: 'Erika German song.mp3' }
+        { id: 1,  nazwa: 'Johnny Joestar', opis: 'Były dżokej ze Stanów Zjednoczonych. Używa mocy Spin i Standu Tusk.', zdjecie: 'johnny11.jpg', audio: 'Fleetwood Mac - Tusk (Official Music Video) [HD].m4a' },
+        { id: 2,  nazwa: 'Gyro Zeppeli', opis: 'Mistrz techniki Steel Ball pochodzący z Królestwa Neapolu.', zdjecie: 'gyro.jpg', audio: 'Ballbreaker.m4a' },
+        { id: 3,  nazwa: 'Diego Brando', opis: 'Genialny dżokej z Wielkiej Brytanii, znany ze swojej bezwzględności.', zdjecie: 'diegobrando.jpg', audio: 'David Bowie- Scary Monsters (And super creeps).m4a' },
+        { id: 4,  nazwa: 'Hot Pants', opis: 'Tajemnicza uczestniczka wyścigu używająca Standu Cream Starter.', zdjecie: 'Hot_Pants.jpg', audio: 'James Brown - Hot Pants.m4a' },
+        { id: 5,  nazwa: 'Ringo Roadagain', opis: 'Rewolwerowiec kierujący się kodeksem pojedynku. Władca czasu (Mandom).', zdjecie: 'ringo.jpg', audio: 'Jerry Wallace - Lovers Of The World (1976).m4a' },
+        { id: 6,  nazwa: 'Mountain Tim', opis: 'Legendarny kowboj i tropiciel, potrafi używać lassa wraz z Mandom.', zdjecie: 'MountainTim.jpg', audio: 'OH LONESOME ME ~ Don Gibson  1958.wmv.m4a' },
+        { id: 7,  nazwa: 'Wekapipo', opis: 'Wojownik z Neapolu, używa techniki Satiporoja Steel Ball.', zdjecie: '400px-Wekapipo_Infobox_Manga.jpg', audio: 'SOUL_d OUT - Wekapipo (Wake up people).m4a' },
+        { id: 8,  nazwa: 'Pocoloco', opis: 'Nieprawdopodobne szczęście sprzyja mu na każdym kroku (Hey Ya!).', zdjecie: '640px-Pocoloco_Infobox_Manga.jpg', audio: 'OutKast - Hey Ya! (Lyrics).m4a' },
+        { id: 9,  nazwa: 'Sandman', opis: 'Biegacz z plemienia rdzennych Amerykanów. Porusza się na własnych nogach!', zdjecie: 'InASilentWaycolor.jpg', audio: 'Sandman.m4a' },
+{ id: 10, nazwa: 'Blackmore', opis: 'Oddany zwiadowca i zabójca Funny Valentine. Posiada Stand Catch the Rainbow, który pozwala mu kontrolować deszcz i poruszać się po kroplach wody.', zdjecie: 'catchtherainbow.jpg', audio: 'Catch The Rainbow.m4a' },
+        {id: 11, nazwa: 'Oyecomova', opis: 'Ekspert od ładunków wybuchowych pochodzący z Hiszpanii (Listen to My Rhythm).', zdjecie: 'OyecomovaStand.jpg', audio: 'Santana - Oye Como Va (Official Audio).m4a' },
+        { id: 12, nazwa: 'L.A Boom Boom', opis: 'Najmłodszy z braci Boom Boom, manipuluje polem magnetycznym.', zdjecie: 'L_a.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 13, nazwa: 'Benjamin Boom Boom', opis: 'Ojciec i przywódca niebezpiecznego rodu Boom Boom.', zdjecie: 'Benjamin_Boom_Boom_Infobox_Manga.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 14, nazwa: 'Andre Boom Boom', opis: 'Należy do przestępczej rodziny Boom Boom, używa przyciągania magnetycznego.', zdjecie: 'Andre.jpg', audio: 'Tomb of the Boom.m4a' },
+        { id: 15, nazwa: 'Mrs Robinson', opis: 'Morderca z pustyni korzystający z zabójczych pszczół w ulu!', zdjecie: 'Mrs_Robinson_Infobox_Manga.jpg', audio: 'Simon & Garfunkel - Mrs. Robinson (Audio).m4a' }
     ];
+    // ==========================================
 
     const imionaSBR = zawodnicySBRData.map(z => z.nazwa);
 
-    let aktywneAudioZawodnika = null;
+    // Zmienne obsługujące odtwarzacz sekcji zawodników
+    let aktualnyAudioObiekt = null;
+    let aktualnyIdZawodnikaAudio = null;
     let aktualnieWybranyDoPodgladu = 1;
 
-    // --- OBIEKTY AUDIO DLA GRY ---
+    // --- OBIEKTY AUDIO DLA RESZTY GRY ---
     let audioSBRMuzyka = new Audio('Johnny Theme _Jojo_s Bizarre Adventure_ Steel Ball Run_ Trailer Song_1.mp3');
     audioSBRMuzyka.loop = true;
 
@@ -55,7 +61,7 @@ $(document).ready(function() {
     let audioAUValentine = new Audio('D4C Funny Valentine Animation _ SBR_1.mp3'); 
     let audioUcieczkaJohnny = new Audio('Arigato_1.mp3');
 
-    // --- INICJALIZACJA PANELA ZAWODNIKÓW Z ZAKŁADKAMI ---
+    // --- INICJALIZACJA PANELA ZAWODNIKÓW ---
     function zainicjujPanelZawodnikow() {
         let $przelacznik = $('#sbr-przelacznik-zawodnikow');
         $przelacznik.empty();
@@ -79,7 +85,34 @@ $(document).ready(function() {
             $przelacznik.append($btn);
         }
 
+        // Dodanie struktury paska postępu i czasu do podglądu, jeśli jeszcze jej nie ma w HTML
+        if ($('#sbr-odtwarzacz-kontener').length === 0) {
+            let odtwarzaczHtml = `
+                <div id="sbr-odtwarzacz-kontener" style="width: 100%; margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #ffcc00;">
+                        <span id="czas-aktualny">0:00</span>
+                        <span id="czas-calkowity">0:00</span>
+                    </div>
+                    <input type="range" id="suwak-czasu" value="0" min="0" max="100" step="0.1" style="width: 100%; cursor: pointer; accent-color: #b14def;">
+                    <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+                        <button id="btn-tyl-15" style="padding: 5px 10px; background: #6c5ce7; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.85em;">⏪ -15s</button>
+                        <button id="btn-odtwarzaj-zawodnika" style="padding: 6px 16px; background: #2ed573; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.95em;">▶ Play</button>
+                        <button id="btn-zatrzymaj-zawodnika" style="padding: 6px 16px; background: #ff4757; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.95em;">⏸ Pause</button>
+                        <button id="btn-przod-15" style="padding: 5px 10px; background: #6c5ce7; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.85em;">+15s ⏩</button>
+                    </div>
+                </div>
+            `;
+            $('#podglad-zawodnika').append(odtwarzaczHtml);
+        }
+
         pokażPodglądZawodnika(1);
+    }
+
+    function formatujCzas(sekundy) {
+        if (isNaN(sekundy)) return "0:00";
+        let min = Math.floor(sekundy / 60);
+        let sek = Math.floor(sekundy % 60);
+        return min + ":" + (sek < 10 ? "0" : "") + sek;
     }
 
     function pokażPodglądZawodnika(id) {
@@ -92,6 +125,19 @@ $(document).ready(function() {
         $('#zawodnik-nazwa').text(id + '. ' + dane.nazwa);
         $('#zawodnik-opis').text(dane.opis);
         $('#zawodnik-zdjecie').attr('src', dane.zdjecie);
+
+        // Jeśli dla tego zawodnika gra już piosenka, zaktualizuj suwak i etykiety czasu
+        if (aktualnyIdZawodnikaAudio === id && aktualnyAudioObiekt) {
+            $('#suwak-czasu').val(aktualnyAudioObiekt.currentTime);
+            $('#suwak-czasu').attr('max', aktualnyAudioObiekt.duration || 100);
+            $('#czas-aktualny').text(formatujCzas(aktualnyAudioObiekt.currentTime));
+            $('#czas-calkowity').text(formatujCzas(aktualnyAudioObiekt.duration));
+        } else {
+            $('#suwak-czasu').val(0);
+            $('#suwak-czasu').attr('max', 100);
+            $('#czas-aktualny').text("0:00");
+            $('#czas-calkowity').text("0:00");
+        }
     }
 
     $(document).on('click', '.btn-zakladka-zawodnik', function() {
@@ -99,8 +145,8 @@ $(document).ready(function() {
         pokażPodglądZawodnika(id);
     });
 
-    // Przycisk PLAY dla aktualnie wybranego zawodnika
-    $('#btn-odtwarzaj-zawodnika').on('click', function() {
+    // Przycisk PLAY (wznawianie od momentu zatrzymania lub start od początku)
+    $(document).on('click', '#btn-odtwarzaj-zawodnika', function() {
         let dane = zawodnicySBRData[aktualnieWybranyDoPodgladu];
         let plikAudio = dane.audio;
 
@@ -109,24 +155,64 @@ $(document).ready(function() {
             return;
         }
 
-        if (aktywneAudioZawodnika) {
-            aktywneAudioZawodnika.pause();
-            aktywneAudioZawodnika.currentTime = 0;
+        // Jeśli kliknięto innego zawodnika, zatrzymujemy poprzedni utwór
+        if (aktualnyIdZawodnikaAudio !== aktualnieWybranyDoPodgladu) {
+            if (aktualnyAudioObiekt) {
+                aktualnyAudioObiekt.pause();
+                aktualnyAudioObiekt = null;
+            }
+            aktualnyAudioObiekt = new Audio(plikAudio);
+            aktualnyAudioObiekt.loop = true;
+            aktualnyIdZawodnikaAudio = aktualnieWybranyDoPodgladu;
+
+            aktualnyAudioObiekt.addEventListener('timeupdate', function() {
+                if (aktualnyIdZawodnikaAudio === aktualnieWybranyDoPodgladu) {
+                    $('#suwak-czasu').val(aktualnyAudioObiekt.currentTime);
+                    $('#czas-aktualny').text(formatujCzas(aktualnyAudioObiekt.currentTime));
+                }
+            });
+
+            aktualnyAudioObiekt.addEventListener('loadedmetadata', function() {
+                if (aktualnyIdZawodnikaAudio === aktualnieWybranyDoPodgladu) {
+                    $('#suwak-czasu').attr('max', aktualnyAudioObiekt.duration);
+                    $('#czas-calkowity').text(formatujCzas(aktualnyAudioObiekt.duration));
+                }
+            });
         }
 
-        aktywneAudioZawodnika = new Audio(plikAudio);
-        aktywneAudioZawodnika.loop = true;
-        aktywneAudioZawodnika.play().catch(e => {
+        aktualnyAudioObiekt.play().catch(e => {
             alert('Nie udało się odtworzyć pliku: ' + plikAudio);
             console.log(e);
         });
     });
 
-    // Przycisk STOP
-    $('#btn-zatrzymaj-zawodnika').on('click', function() {
-        if (aktywneAudioZawodnika) {
-            aktywneAudioZawodnika.pause();
-            aktywneAudioZawodnika.currentTime = 0;
+    // Przycisk PAUSE (pauza bez resetowania czasu)
+    $(document).on('click', '#btn-zatrzymaj-zawodnika', function() {
+        if (aktualnyAudioObiekt) {
+            aktualnyAudioObiekt.pause();
+        }
+    });
+
+    // Przycisk przewijania o 15 sekund do tyłu (-15s)
+    $(document).on('click', '#btn-tyl-15', function() {
+        if (aktualnyAudioObiekt) {
+            aktualnyAudioObiekt.currentTime = Math.max(0, aktualnyAudioObiekt.currentTime - 15);
+        }
+    });
+
+    // Przycisk przewijania o 15 sekund do przodu (+15s)
+    $(document).on('click', '#btn-przod-15', function() {
+        if (aktualnyAudioObiekt) {
+            aktualnyAudioObiekt.currentTime = Math.min(aktualnyAudioObiekt.duration || 0, aktualnyAudioObiekt.currentTime + 15);
+        }
+    });
+
+    // Obsługa suwaka (wybór momentu utworu)
+    $(document).on('input', '#suwak-czasu', function() {
+        if (aktualnyAudioObiekt && aktualnyIdZawodnikaAudio === aktualnieWybranyDoPodgladu) {
+            let nowyCzas = $(this).val();
+            aktualnyAudioObiekt.currentTime = nowyCzas;
+            $('#czas-aktualny').text(formatujCzas(nowyCzas));
         }
     });
 
